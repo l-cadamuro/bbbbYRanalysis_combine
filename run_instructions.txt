@@ -1,0 +1,3 @@
+text2workspace.py test_datacard.txt
+combine -M AsymptoticLimits --run blind test_datacard.root
+combine -M Significance  -t -1 --expectSignal 1 test_datacard.root
