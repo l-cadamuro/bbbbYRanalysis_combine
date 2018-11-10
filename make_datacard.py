@@ -45,13 +45,15 @@ parser.add_argument('--var',     dest='var',     help='variable name',     defau
 parser.add_argument('--sel',     dest='sel',     help='selection name',    default = 'baseline_SR')
 parser.add_argument('--fileIn',  dest='filein',  help='input file',        default = '/afs/cern.ch/work/l/lcadamur/private/YR_bbbb_analysis/CMSSW_9_3_2/src/bbbbYRanalysis/histofiller/bbbbAnalysis/various_plots/outPlotter.root')
 parser.add_argument('--cardOut', dest='cardout', help='output card name',  default = 'cards/datacard.txt')
+parser.add_argument('--sigs',    dest='sigs',    help='list of signals',   nargs='+', default = ['HH'])
 parser.add_argument('--QCDsyst', dest='QCDsyst', help='sigmas for the QCD syst',  default = None)
 args = parser.parse_args()
 
 fIn_name = args.filein
 fIn = ROOT.TFile.Open(fIn_name)
 
-sigs  = ['HH']
+# sigs  = ['HH']
+sigs  = list(args.sigs)
 bkgs  = ['QCD', 'ttbar', 'ttH', 'ZH', 'WH', 'VBFH', 'ggH']
 
 # all_proc = sigs + bkgs ## everything that goes in the card
@@ -75,6 +77,8 @@ print "** input file:  ", fIn_name
 print "** output card: ", card_name
 print "** selection:   ", selection
 print "** variable:    ", final_var
+print "** signals:     ", sigs
+print "** backgrounds: ", bkgs
 #######################
 
 fcard = open(card_name, 'w')
